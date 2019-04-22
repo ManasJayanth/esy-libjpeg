@@ -1,0 +1,21 @@
+parameters:
+  host: ''
+  pool: ''
+  sign: false
+
+jobs:
+- job: ${{ parameters.host }}
+  pool: ${{ parameters.pool }}
+  steps:
+  - ${{ if eq(parameters.sign, 'true') }}:
+    - script: 'npm install -g esy@latest --unsafe-perm'
+      displayName: 'Installing deps'
+  - ${{ if eq(parameters.sign, 'false') }}:
+    - script: 'sudo npm install -g esy@latest --unsafe-perm'
+      displayName: 'Installing deps'
+  - script: esy install
+    displayName: 'Installing deps'
+  - script: esy build
+    displayName: 'Building'
+  - script: esy x which automake
+    displayName: 'Dry run'
