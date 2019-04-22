@@ -4,6 +4,12 @@
   "description": "libjpeg packaged for esy",
   "esy": {
     "buildsInSource": true,
+    "exportEnv": {
+      "LDFLAGS": {
+        "scope": "global",
+        "val": "-L#{self.lib} -ljpeg"
+      }
+    },
     "build": [
       "mkdir -p #{self.install / 'man' / 'man1'}",
       [
@@ -17,7 +23,8 @@
       [
         "make",
         "install"
-      ]
+      ],
+      "cp libjpeg.a #{self.lib}"
     ]
   }
 }
