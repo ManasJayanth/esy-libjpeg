@@ -7,7 +7,7 @@
     "exportEnv": {
       "LDFLAGS": {
         "scope": "global",
-        "val": "-L#{self.lib} -ljpeg"
+        "val": "-L#{self.lib} -ljpeg $LDFLAGS"
       }
     },
     "build": [
